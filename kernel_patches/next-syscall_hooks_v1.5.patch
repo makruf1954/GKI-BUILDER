@@ -6,7 +6,7 @@ index 78be582b5766..c2045ade6ccc 100644
   * to 'seed' initial state of a switch or initial position of absolute
   * axis, etc.
   */
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +extern bool ksu_input_hook __read_mostly;
 +extern int ksu_handle_input_handle_event(unsigned int *type, unsigned int *code, int *value);
 +#endif
@@ -16,7 +16,7 @@ index 78be582b5766..c2045ade6ccc 100644
  {
  	unsigned long flags;
  
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +	if (unlikely(ksu_input_hook))
 +		ksu_handle_input_handle_event(&type, &code, &value);
 +#endif
@@ -32,7 +32,7 @@ index 78e15a17c3e5..78d076116855 100644
  	set_mask_bits(&mm->flags, MMF_DUMPABLE_MASK, value);
  }
  
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +__attribute__((hot))
 +extern int ksu_handle_execve_sucompat(int *fd, const char __user **filename_user,
 +			       void *__never_use_argv, void *__never_use_envp,
@@ -44,7 +44,7 @@ index 78e15a17c3e5..78d076116855 100644
  		const char __user *const __user *, argv,
  		const char __user *const __user *, envp)
  {
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +	ksu_handle_execve_sucompat((int *)AT_FDCWD, &filename, NULL, NULL, NULL);
 +#endif
  	return do_execve(getname(filename), argv, envp);
@@ -54,7 +54,7 @@ index 78e15a17c3e5..78d076116855 100644
  	const compat_uptr_t __user *, argv,
  	const compat_uptr_t __user *, envp)
  {
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK) // 32-bit su and 32-on-64 support
++#ifdef CONFIG_KSU // 32-bit su and 32-on-64 support
 +	ksu_handle_execve_sucompat((int *)AT_FDCWD, &filename, NULL, NULL, NULL);
 +#endif
  	return compat_do_execve(getname(filename), argv, envp);
@@ -68,7 +68,7 @@ index f5a50cc9cd12..fd694b702278 100644
  	return res;
  }
  
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +__attribute__((hot))
 +extern int ksu_handle_faccessat(int *dfd, const char __user **filename_user,
 +		               int *mode, int *flags);
@@ -76,7 +76,7 @@ index f5a50cc9cd12..fd694b702278 100644
 +
  SYSCALL_DEFINE3(faccessat, int, dfd, const char __user *, filename, int, mode)
  {
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +	ksu_handle_faccessat(&dfd, &filename, &mode, NULL);
 +#endif
  	return do_faccessat(dfd, filename, mode, 0);
@@ -90,7 +90,7 @@ index 7a2ff6157eda..c7a5e8ec2988 100644
  	return ret;
  }
  
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +extern bool ksu_vfs_read_hook __read_mostly;
 +extern int ksu_handle_sys_read(unsigned int fd, char __user **buf_ptr,
 +			size_t *count_ptr);
@@ -98,7 +98,7 @@ index 7a2ff6157eda..c7a5e8ec2988 100644
 +
  SYSCALL_DEFINE3(read, unsigned int, fd, char __user *, buf, size_t, count)
  {
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +	if (unlikely(ksu_vfs_read_hook))
 +		ksu_handle_sys_read(fd, &buf, &count);
 +#endif
@@ -113,7 +113,7 @@ index daf28da335cd..3fa40c6d7446 100644
  	return cp_new_stat(&stat, statbuf);
  }
  
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +__attribute__((hot))
 +extern int ksu_handle_stat(int *dfd, const char __user **filename_user,
 +		               int *flags);
@@ -126,7 +126,7 @@ index daf28da335cd..3fa40c6d7446 100644
  	struct kstat stat;
  	int error;
  
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK)
++#ifdef CONFIG_KSU
 +	ksu_handle_stat(&dfd, &filename, &flag);
 +#endif
  	error = vfs_fstatat(dfd, filename, &stat, flag);
@@ -136,7 +136,7 @@ index daf28da335cd..3fa40c6d7446 100644
  	struct kstat stat;
  	int error;
  
-+#if defined(CONFIG_KSU) && !defined(CONFIG_KSU_KPROBES_HOOK) // 32-bit su
++#ifdef CONFIG_KSU // 32-bit su
 +	ksu_handle_stat(&dfd, &filename, &flag);
 +#endif
  	error = vfs_fstatat(dfd, filename, &stat, flag);

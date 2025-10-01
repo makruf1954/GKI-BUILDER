@@ -68,8 +68,13 @@ class KSUInstaller:
         if self.variant.upper() in self.MANUAL_HOOK_UNSUPPORTED:
             log(f"Skipping manual hooks patch for variant: {self.variant}")
             return
+        
+        hook_patch: Path
 
-        hook_patch: Path = PATCHES / "syscall_hooks_v1.5.patch"
+        if self.variant.upper() == "NEXT":
+            hook_patch = PATCHES / "next-syscall_hooks_v1.5.patch"
+        else: # SUKI
+            hook_patch = PATCHES / "suki-syscall_hooks_v1.5.patch"
 
         apply_patch(hook_patch, check=False, cwd=WORKSPACE)
 
