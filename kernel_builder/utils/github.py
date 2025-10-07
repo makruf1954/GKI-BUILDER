@@ -33,3 +33,6 @@ class GithubAPI:
             return data["tag_name"]
         except KeyError:
             raise ValueError(f"'tag_name' not found in response from {repo_api}")
+
+if __name__ == "__main__":
+    raise SystemExit("This file is meant to be imported, not executed.")

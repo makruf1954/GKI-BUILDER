@@ -46,3 +46,6 @@ def fetch_clang_url(variants: str) -> str:
             return fetch_clang_tzst(NEUTRON_CLANG)
         case _:
             raise Exception("Unknown clang variant")
+
+if __name__ == "__main__":
+    raise SystemExit("This file is meant to be imported, not executed.")

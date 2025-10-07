@@ -82,3 +82,6 @@ class GithubExportEnv:
         }
         log(f"Environment map to export: {env_map}")
         self._write_env(env_map)
+
+if __name__ == "__main__":
+    raise SystemExit("This file is meant to be imported, not executed.")

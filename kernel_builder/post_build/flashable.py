@@ -115,3 +115,6 @@ class FlashableBuilder:
 
         shutil.move(boot_tmp / "boot.img", OUTPUT / "boot.img")
         log(f"Boot image created at {OUTPUT}")
+
+if __name__ == "__main__":
+    raise SystemExit("This file is meant to be imported, not executed.")

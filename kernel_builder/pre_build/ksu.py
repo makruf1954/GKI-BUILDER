@@ -71,10 +71,10 @@ class KSUInstaller:
         
         hook_patch: Path
 
-        if self.variant.upper() == "NEXT":
-            hook_patch = PATCHES / "next-syscall_hooks_v1.5.patch"
-        else: # SUKI
+        if self.variant.upper() == "SUKI":
             hook_patch = PATCHES / "suki-syscall_hooks_v1.5.patch"
+        else: # NEXT
+            hook_patch = PATCHES / "next-syscall_hooks_v1.4.patch"
 
         apply_patch(hook_patch, check=False, cwd=WORKSPACE)
 

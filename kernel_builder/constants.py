@@ -16,3 +16,6 @@ LLVM: Final[str] = "1"
 LLVM_IAS: Final[str] = "1"
 CLANG_TRIPLE: Final[str] = "aarch64-linux-gnu-"
 CROSS_COMPILE: Final[str] = "aarch64-linux-gnu-"
+
+if __name__ == "__main__":
+    raise SystemExit("This file is meant to be imported, not executed.")
