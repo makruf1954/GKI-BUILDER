@@ -29,5 +29,6 @@ def apply_patch(
         _ok_code=[0, 1] if not check else [0],
     )
 
+
 if __name__ == "__main__":
     raise SystemExit("This file is meant to be imported, not executed.")

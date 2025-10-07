@@ -30,5 +30,6 @@ class VariantsParser:
             raise RuntimeError("No matching variant for current environment")
         return v.get("config", {})
 
+
 if __name__ == "__main__":
     raise SystemExit("This file is meant to be imported, not executed.")

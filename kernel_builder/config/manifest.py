@@ -45,12 +45,19 @@ SUSFS: Source = {
     "to": str(WORKSPACE / "susfs4ksu"),
 }
 
+WILD_PATCHES: Source = {
+    "url": "github.com:WildKernels/kernel_patches",
+    "branch": "main",
+    "to": str(WORKSPACE / "wild_patches"),
+}
+
 SOURCES: Final[list[Source]] = [
     KERNEL,
     ANYKERNEL,
     BUILD_TOOL,
     MKBOOTIMG,
     SUSFS,
+    WILD_PATCHES,
 ]
 
 if __name__ == "__main__":

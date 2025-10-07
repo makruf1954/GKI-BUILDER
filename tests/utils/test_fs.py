@@ -10,6 +10,7 @@ def restore_cwd():
     yield
     os.chdir(original)
 
+
 def test_reset_path(tmp_path: Path) -> None:
     p: Path = tmp_path / "out"
     p.mkdir()

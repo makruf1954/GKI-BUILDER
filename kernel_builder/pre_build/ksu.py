@@ -28,10 +28,7 @@ class KSUInstaller:
             url = self.source.git_simplifier(url)
 
         # Fetch latest tag
-        if "KernelSU-Next" in url:
-            user, repo = "KernelSU-Next", "KernelSU-Next"
-        else:
-            user, repo = url.split(":", 1)[1].split("/", 1)
+        user, repo = url.split(":", 1)[1].split("/", 1)
         latest_tag: str = self._fetch_latest_tag(user, repo)
         ref = ref or latest_tag
 
@@ -68,12 +65,12 @@ class KSUInstaller:
         if self.variant.upper() in self.MANUAL_HOOK_UNSUPPORTED:
             log(f"Skipping manual hooks patch for variant: {self.variant}")
             return
-        
+
         hook_patch: Path
 
         if self.variant.upper() == "SUKI":
             hook_patch = PATCHES / "suki-syscall_hooks_v1.5.patch"
-        else: # NEXT
+        else:  # NEXT
             hook_patch = PATCHES / "next-syscall_hooks_v1.4.patch"
 
         apply_patch(hook_patch, check=False, cwd=WORKSPACE)
@@ -93,13 +90,13 @@ class KSUInstaller:
                 repo = "github.com:tiann/KernelSU"
                 ref = "main"
             case "NEXT":
-                repo = "github.com:ESK-Project/KernelSU-Next"
-                ref = "next-susfs" if self.use_susfs else "next"
+                repo = "github.com:KernelSU-Next/KernelSU-Next"
+                ref = "next"
             case "SUKI":
                 repo = "github.com:SukiSU-Ultra/SukiSU-Ultra"
                 ref = "susfs-main" if self.use_susfs else "nongki"
             case _:
-                log(f"Unknown KernelSU variant {variant}, skipping install")
+                log(f"Unknown KernelSU variant: {variant}, skipping install")
                 return
 
         self._install_ksu(repo, ref)

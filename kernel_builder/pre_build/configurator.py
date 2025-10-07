@@ -36,5 +36,6 @@ def configurator() -> None:
     # Clang LTO setup
     _lto()
 
+
 if __name__ == "__main__":
     raise SystemExit("This file is meant to be imported, not executed.")
