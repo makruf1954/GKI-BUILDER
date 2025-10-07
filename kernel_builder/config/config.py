@@ -13,7 +13,7 @@ LTO: Literal["thin", "full"] = "thin"
 
 # ---- Kernel
 KERNEL_REPO: Final[str] = "github.com:ESK-Project/android_kernel_xiaomi_mt6895"
-KERNEL_BRANCH: Final[str] = "16"
+KERNEL_BRANCH: Final[str] = "16-bbg"
 
 # ---- AnyKernel3
 ANYKERNEL_REPO = "github.com:ESK-Project/AnyKernel3"
