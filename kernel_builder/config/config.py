@@ -4,23 +4,23 @@ from typing import Final, Literal
 from kernel_builder.constants import ROOT
 
 # ---- Build Info
-KERNEL_NAME: Final[str] = "ESK"
-DEFCONFIG: Final[str] = "gki_defconfig"
-BUILD_USER: Final[str] = "gki-builder"
-BUILD_HOST: Final[str] = "esk"
+KERNEL_NAME: Final[str] = "AZURE"
+DEFCONFIG: Final[str] = "dv_defconfig"
+BUILD_USER: Final[str] = "naifiprjkt"
+BUILD_HOST: Final[str] = "github-action"
 IMAGE_COMP: Final[Literal["raw", "lz4", "gz"]] = "gz"
 LTO: Literal["thin", "full"] = "thin"
 
 # ---- Kernel
-KERNEL_REPO: Final[str] = "github.com:ESK-Project/android_kernel_xiaomi_mt6895"
-KERNEL_BRANCH: Final[str] = "16"
+KERNEL_REPO: Final[str] = "github.com:makruf1954/kernel-android12-5.10"
+KERNEL_BRANCH: Final[str] = "azure"
 
 # ---- AnyKernel3
 ANYKERNEL_REPO = "github.com:ESK-Project/AnyKernel3"
 ANYKERNEL_BRANCH = "android12-5.10"
 
 # ---- Release
-RELEASE_REPO: Final[str] = "ESK-Project/esk-releases"
+RELEASE_REPO: Final[str] = "makruf1954/releases"
 RELEASE_BRANCH: Final[str] = "main"
 
 # ---- Clang
